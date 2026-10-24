@@ -1,0 +1,55 @@
+HOW TO USE: synthesis-control-compiler
+====================================
+
+PURPOSE
+  Compile the complete voice cloning and behavioral dossier into machine-executable
+  instructions: Kokoro blend recipes, SSML tags, Praat KlattGrid parameter blocks,
+  WORLD vocoder recipes, and LLM persona prompts with anti-TTS negative constraints.
+
+CAPABILITIES
+  - Generate Kokoro TTS blend recipes (base voice weights, speed scalars, phonetic fixes)
+  - Produce standards-compliant SSML with prosody contours, breaks, and IPA phoneme tags
+  - Format Praat KlattGrid parameter blocks (F0, F1-F4, B1-B4, open quotient, voicing gain)
+  - Configure WORLD vocoder parameters (F0 range, VTL warping factor, aperiodicity boost)
+  - Formulate LLM persona system prompts with strict anti-TTS negative constraints
+  - Output machine-readable compiler_output.json and exportable config snippets
+
+USE CASES
+  - "Take all these reports and give me the actual files to make the voice speak"
+  - You want to configure Kokoro TTS to sound like this speaker
+  - You need Praat scripts or WORLD vocoder parameters for parametric resynthesis
+  - You need an LLM system prompt that stops the model from talking like a generic assistant
+
+IDEAS
+  - Ingest outputs from idiolect, intonation, temporal, and affect skills first
+  - Run the synthesized audio through clone-verification-match-score to test fidelity
+  - Copy the Kokoro blend recipe or SSML markup directly into your audio pipeline
+
+PROMPTS YOU CAN PASTE
+  /synthesis-compiler Queens-male-orator
+
+  compile voice synthesis for Steve Jobs
+
+  generate TTS recipe for this speaker
+
+  build synthesis controls for this voice. Give me Kokoro weights, SSML, and Klatt params.
+
+  Convert this voice dossier into an LLM prompt with anti-generic-TTS constraints.
+
+EXAMPLE FLOW
+  You:   /synthesis-compiler Queens-male-orator
+  Model: 1. Kokoro Recipe:
+         - Voices: am_adam (0.65) + am_george (0.35), speed: 0.96x
+         - Fixes: {"huge": "yooje", "coffee": "cawfee"}
+         2. SSML Spec:
+         <speak>We will win <break time="650ms"/> and it will be <phoneme ph="juːdʒ">huge</phoneme>.</speak>
+         3. KlattGrid Constants: OQ=0.44, AV=62dB, F1-F4 targets
+         4. LLM Negative Constraints: FORBID "Certainly", "In conclusion", balanced parataxis.
+         [compiler_output.json]
+
+DEFAULT GOALS IF YOU DON'T NAME ONE
+  1. Kokoro voice blend weights and playback speed scalar
+  2. SSML markup sample with idiolect IPA and prosody
+  3. Praat KlattGrid and WORLD vocoder parameters
+  4. LLM persona prompt with anti-TTS negative rules
+  5. Machine-readable compiler_output.json block
